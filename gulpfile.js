@@ -55,14 +55,11 @@ gulp.task('lint', () => {
 });
 
 gulp.task('views', () => {
-  return gulp.src('app/*.njk')
-    .pipe($.nunjucksRender({
-      path: 'app'
-    }))
-    .pipe($.if('*.js', $.rev()))
-    .pipe($.if('*.css', $.rev()))
-    .pipe($.revReplace())
-    .pipe(gulp.dest('.tmp'));
+  return gulp.src('app/*.pug')
+    .pipe($.plumber())
+    .pipe($.pug({pretty: true}))
+    .pipe(gulp.dest('.tmp'))
+    .pipe(reload({stream: true}));
 });
 
 gulp.task('html', ['views', 'styles', 'scripts'], () => {
@@ -71,6 +68,9 @@ gulp.task('html', ['views', 'styles', 'scripts'], () => {
             }))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
+    .pipe($.if('*.js', $.rev()))
+    .pipe($.if('*.css', $.rev()))
+    .pipe($.revReplace())
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
 });
@@ -91,7 +91,7 @@ gulp.task('extras', () => {
   return gulp.src([
     'app/*',
     '!app/*.html',
-    '!app/**/*.njk'
+    '!app/*.pug'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
@@ -113,11 +113,12 @@ gulp.task('serve', () => {
     });
 
     gulp.watch([
+      'app/*.html',
       'app/images/**/*',
       '.tmp/fonts/**/*'
     ]).on('change', reload);
 
-    gulp.watch('app/**/*.{html,njk}', ['views', reload]);
+    gulp.watch('app/**/*.pug', ['views']);
     gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/fonts/**/*', ['fonts']);
@@ -144,23 +145,10 @@ gulp.task('wiredep', () => {
     }))
     .pipe(gulp.dest('app/styles'));
 
-  gulp.src('app/layouts/*.njk')
+  gulp.src('app/layouts/*.pug')
     .pipe(wiredep({
-      ignorePath: /^(\.\.\/)*\.\./,
-      fileTypes: {
-       njk: {
-         block: /(([ \t]*)<!--\s*bower:*(\S*)\s*-->)(\n|\r|.)*?(<!--\s*endbower\s*-->)/gi,
-         detect: {
-           js: /<script.*src=['"]([^'"]+)/gi,
-           css: /<link.*href=['"]([^'"]+)/gi
-         },
-         replace: {
-           js: '<script src="{{filePath}}"></script>',
-           css: '<link rel="stylesheet" href="{{filePath}}" />'
-         }
-       }
-      }
-      }))
+      ignorePath: /^(\.\.\/)*\.\./
+    }))
     .pipe(gulp.dest('app/layouts'));
 });
 

@@ -1,0 +1,29 @@
+footer
+  background $dark-color
+  color $light-color
+  clearfix()
+  span
+    float left
+    margin-top 15px
+    +below('s')
+      display inline-block
+      width 100%
+      text-align center
+      padding-top 20px
+      float none
+      margin auto
+  ul
+    float right
+    padding 0
+    +below('s')
+      display inline-block
+      width 100%
+      text-align center
+      float none
+      margin 7px auto
+    li
+      display inline-block
+      margin-left 20px
+      cursor pointer
+      +below('s')
+        column(1/3)
