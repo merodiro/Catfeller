@@ -1,0 +1,47 @@
+normalize()
+box-sizing-reset()
+
+body
+  background $light-color
+  color $dark-color
+  font-family 'Open sans', sans-serif
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  font-family 'Roboto', sans-serif
+
+.container
+  center()
+  +above('s')
+    center(540px, 15px)
+  +above('m')
+    center(720px, 15px)
+  +above('l')
+    center(920px, 15px)
+  +above('xl')
+    center(1140px, 15px)
+
+.overlay
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background-color rgba(darken($main-color, 50%), 0.15)
+  z-index 1
+
+.special-heading
+  position relative
+  font-family 'Baloo Bhaina', cursive
+  &:after
+    content ""
+    display block
+    position absolute
+    top 35px
+    left 0
+    width 40px
+    border-bottom 3px solid $dark-color
