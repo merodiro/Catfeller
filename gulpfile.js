@@ -5,9 +5,9 @@ const browserSync = require('browser-sync').create();
 const del = require('del');
 const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
+const lazypipe = require('lazypipe');
 
 // stylus packages
-// const nib = require('nib');
 const koutoSwiss = require( "kouto-swiss" )
 const rupture = require('rupture');
 const jeet = require('jeet');
@@ -15,7 +15,16 @@ const jeet = require('jeet');
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-var dev = true;
+let dev = true;
+
+const stylesChannel = lazypipe()
+  .pipe($.uncss, { html: ['app/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/'] })
+  .pipe($.cssnano, {safe: true, autoprefixer: false})
+  .pipe($.rev)
+
+const scriptsChannel = lazypipe()
+  .pipe($.uglify)
+  .pipe($.rev)
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/main.styl')
@@ -66,10 +75,8 @@ gulp.task('html', ['views', 'styles', 'scripts'], () => {
   return gulp.src(['app/*.html', '.tmp/*.html'])
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']
             }))
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
-    .pipe($.if('*.js', $.rev()))
-    .pipe($.if('*.css', $.rev()))
+    .pipe($.if('*.js', scriptsChannel()))
+    .pipe($.if('*.css', stylesChannel()))
     .pipe($.revReplace())
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
@@ -150,6 +157,11 @@ gulp.task('wiredep', () => {
       ignorePath: /^(\.\.\/)*\.\./
     }))
     .pipe(gulp.dest('app/layouts'));
+});
+
+gulp.task('deploy', ['default'], () => {
+  return gulp.src('dist/**/*')
+    .pipe($.ghPages());
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {

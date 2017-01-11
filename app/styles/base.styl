@@ -4,7 +4,7 @@ box-sizing-reset()
 body
   background $light-color
   color $dark-color
-  font-family 'Open sans', sans-serif
+  font-family $body-font
 
 section
   padding 40px 20px
@@ -15,7 +15,7 @@ h3,
 h4,
 h5,
 h6
-  font-family 'Roboto', sans-serif
+  font-family $head-font
 
 .container
   center()
@@ -39,7 +39,7 @@ h6
 
 .special-heading
   position relative
-  font-family 'Baloo Bhaina', cursive
+  font-family $special-font
   &:after
     content ""
     display block
