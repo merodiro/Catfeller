@@ -10,4 +10,10 @@ $( () =>{
     cursorborderradius: 100,
     zindex: 9999
   });
+
+
+  //loading screen
+  $(window).on('load', function() {
+    $('.spinner-wrapper').fadeOut(500)
+  });
 });

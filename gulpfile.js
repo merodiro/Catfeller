@@ -18,7 +18,9 @@ const reload = browserSync.reload;
 let dev = true;
 
 const stylesChannel = lazypipe()
-  .pipe($.uncss, { html: ['app/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/'] })
+  .pipe($.uncss, {
+    html: ['app/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/']
+ })
   .pipe($.cssnano, {safe: true, autoprefixer: false})
   .pipe($.rev)
 
