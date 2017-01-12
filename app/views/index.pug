@@ -6,7 +6,7 @@ block append config
   - let pageTitle = 'Home'
 
 block content
-  section.showcase
+  section.showcase.scroll
     .overlay
       .container
         h1.responsive_headline Welcome to
@@ -15,18 +15,18 @@ block content
           | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   section.services
     .container
-      h2.special-heading Our services
+      h2.special-heading.scroll Our services
       .ser-wrapper
         each service in services
           +service(service.icon, service.name, service.description)
   .container
-    hr.seprator
+    hr.seprator.scroll
       //- end services
-  section.our-team.wow.bounceInUp
+  section.our-team
     .container
       .text
-        h2.special-heading.wow.fadeInLeft Our team
-        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        h2.special-heading.scroll Our team
+        p.fadeInLeft.scroll Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       .members
         each member in members
           +member(member.name, member.image)
@@ -34,7 +34,7 @@ block content
   //- end team
   footer
     .container
-      span Copytight &copy; 2015 All right reserved
+      span Copyright &copy; 2015 All right reserved
 
       ul
         li
