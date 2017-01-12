@@ -19,7 +19,7 @@ let dev = true;
 
 const stylesChannel = lazypipe()
   .pipe($.uncss, {
-    html: ['app/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/']
+    html: ['app/views/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/']
  })
   .pipe($.cssnano, {safe: true, autoprefixer: false})
   .pipe($.rev)
@@ -66,7 +66,7 @@ gulp.task('lint', () => {
 });
 
 gulp.task('views', () => {
-  return gulp.src('app/*.pug')
+  return gulp.src('app/views/*.pug')
     .pipe($.plumber())
     .pipe($.pug({pretty: true}))
     .pipe(gulp.dest('.tmp'))
@@ -100,7 +100,8 @@ gulp.task('extras', () => {
   return gulp.src([
     'app/*',
     '!app/*.html',
-    '!app/*.pug'
+    '!app/**/*.pug',
+    '!app/views/'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));

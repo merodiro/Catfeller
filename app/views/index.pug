@@ -1,0 +1,48 @@
+extends layouts/default
+include mixins/service
+include mixins/member
+block content
+  section.showcase
+    .overlay
+      .container
+        h1.responsive_headline
+          | Welcome to
+          span Catfeller
+        p
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  section.services
+    .container
+      h2.special-heading Our services
+      .ser-wrapper
+        +service('laptop', 'Responsive Layout')
+        +service('cloud', 'Cloud Services')
+        +service('lightbulb', 'Fresh Ideas')
+        +service('envelope', 'Attachments')
+        +service('video', 'Support video')
+        +service('brush', 'Lovely Design')
+  .container
+    hr.seprator
+      //- end services
+  section.our-team
+    .container
+      .text
+        h2.special-heading Our team
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      .members
+        +member('Jane', 'images/member1.jpg')
+        +member('Sylvester', 'images/member2.jpg')
+        +member('Peter', 'images/member3.jpg')
+        +member('Eva', 'images/member4.jpg')
+
+  //- end team
+  footer
+    .container
+      span Copytight &copy; 2015 All right reserved
+
+      ul
+        li
+          a.facebook
+        li
+          a.twitter
+        li
+          a.github

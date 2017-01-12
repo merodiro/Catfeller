@@ -1,0 +1,9 @@
+mixin service(icon, title)
+  .service
+    i.icon(class=icon)
+    .content
+      h3=title
+      if block
+        block
+      else
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
