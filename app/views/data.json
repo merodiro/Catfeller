@@ -1,0 +1,22 @@
+{
+  "title": "Catfeller",
+  "links": [
+    {"name": "Home"},
+    {"name": "About"},
+    {"name": "Contact"}
+  ],
+  "services": [
+    {"icon": "laptop", "name": "Responsive Layout"},
+    {"icon": "cloud", "name": "Cloud Services"},
+    {"icon": "lightbulb", "name": "Fresh Ideas"},
+    {"icon": "envelope", "name": "Attachments"},
+    {"icon": "video", "name": "Support video"},
+    {"icon": "brush", "name": "Lovely Design"}
+  ],
+  "members": [
+    {"name": "Jane", "image": "images/member1.jpg"},
+    {"name": "Sylvester", "image": "images/member2.jpg"},
+    {"name": "Peter", "image": "images/member3.jpg"},
+    {"name": "Eva", "image": "images/member4.jpg"}
+  ]
+}

@@ -1,38 +1,35 @@
 extends layouts/default
 include mixins/service
 include mixins/member
+
+block append config
+  - let pageTitle = 'Home'
+
 block content
   section.showcase
     .overlay
       .container
-        h1.responsive_headline
-          | Welcome to
-          span Catfeller
+        h1.responsive_headline Welcome to
+          span= title
         p
           | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   section.services
     .container
       h2.special-heading Our services
       .ser-wrapper
-        +service('laptop', 'Responsive Layout')
-        +service('cloud', 'Cloud Services')
-        +service('lightbulb', 'Fresh Ideas')
-        +service('envelope', 'Attachments')
-        +service('video', 'Support video')
-        +service('brush', 'Lovely Design')
+        each service in services
+          +service(service.icon, service.name, service.description)
   .container
     hr.seprator
       //- end services
-  section.our-team
+  section.our-team.wow.bounceInUp
     .container
       .text
-        h2.special-heading Our team
+        h2.special-heading.wow.fadeInLeft Our team
         p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       .members
-        +member('Jane', 'images/member1.jpg')
-        +member('Sylvester', 'images/member2.jpg')
-        +member('Peter', 'images/member3.jpg')
-        +member('Eva', 'images/member4.jpg')
+        each member in members
+          +member(member.name, member.image)
 
   //- end team
   footer
@@ -41,7 +38,7 @@ block content
 
       ul
         li
-          a.facebook
+          a.facebook(href="https://facebook.com")
         li
           a.twitter
         li

@@ -6,6 +6,7 @@ const del = require('del');
 const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
 const lazypipe = require('lazypipe');
+const path = require('path');
 
 // stylus packages
 const koutoSwiss = require( "kouto-swiss" )
@@ -17,9 +18,18 @@ const reload = browserSync.reload;
 
 let dev = true;
 
+const dataFile = './app/views/data.json'
+
+function requireUncached( $module ) {
+    delete require.cache[require.resolve( $module )];
+    return require( $module );
+}
+
+
 const stylesChannel = lazypipe()
   .pipe($.uncss, {
-    html: ['app/views/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/']
+    html: ['app/views/*.html', '.tmp/*.html', 'https://merodiro.github.io/Catfeller/'],
+    ignore: ['animated', '.rubberBand']
  })
   .pipe($.cssnano, {safe: true, autoprefixer: false})
   .pipe($.rev)
@@ -68,7 +78,12 @@ gulp.task('lint', () => {
 gulp.task('views', () => {
   return gulp.src('app/views/*.pug')
     .pipe($.plumber())
-    .pipe($.pug({pretty: true}))
+    .pipe($.pugLinter())
+    .pipe($.pugLinter.reporter())
+    .pipe($.pug({
+      pretty: true,
+      locals: requireUncached(dataFile)
+    }))
     .pipe(gulp.dest('.tmp'))
     .pipe(reload({stream: true}));
 });
@@ -129,6 +144,7 @@ gulp.task('serve', () => {
     ]).on('change', reload);
 
     gulp.watch('app/**/*.pug', ['views']);
+    gulp.watch('app/views/*.json', ['views']);
     gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/fonts/**/*', ['fonts']);
@@ -155,11 +171,11 @@ gulp.task('wiredep', () => {
     }))
     .pipe(gulp.dest('app/styles'));
 
-  gulp.src('app/layouts/*.pug')
+  gulp.src('app/views/layouts/*.pug')
     .pipe(wiredep({
       ignorePath: /^(\.\.\/)*\.\./
     }))
-    .pipe(gulp.dest('app/layouts'));
+    .pipe(gulp.dest('app/views/layouts'));
 });
 
 gulp.task('deploy', ['default'], () => {

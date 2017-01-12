@@ -1,10 +1,10 @@
+mixin navbarLink(name, link = '#')
+  li
+    a(href=link class=pageTitle==name?'active':'' )= name
+
 nav.navbar
   .container
-    h2 Catfeller
+    h2= title
     ul
-      li
-        a(href='#') Home
-      li
-        a(href='#') About
-      li
-        a(href='#') Contact
+      each link in links
+        +navbarLink(link.name)

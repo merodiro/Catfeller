@@ -1,5 +1,4 @@
 block config
-  -var title = 'Catfeller'
 
 doctype html
 html(lang='en')
@@ -13,6 +12,7 @@ html(lang='en')
     // build:css styles/vendor.css
     // bower:css
     // endbower
+    link(rel='stylesheet', href='/bower_components/animate.css/animate.min.css')
     // endbuild
 
     // build:css styles/main.css
@@ -22,21 +22,10 @@ html(lang='en')
 
   body
 
-    .spinner-wrapper
-      .sk-cube-grid
-       .sk-cube.sk-cube1
-       .sk-cube.sk-cube2
-       .sk-cube.sk-cube3
-       .sk-cube.sk-cube4
-       .sk-cube.sk-cube5
-       .sk-cube.sk-cube6
-       .sk-cube.sk-cube7
-       .sk-cube.sk-cube8
-       .sk-cube.sk-cube9
-
-
+    include ../includes/loader
 
     include ../includes/navbar
+
     block content
 
 
@@ -45,8 +34,14 @@ html(lang='en')
     script(src='/bower_components/jquery/dist/jquery.js')
     // endbower
     script(src='scripts/jquery.fittext.js')
+    script(src='/bower_components/wow/dist/wow.min.js')
     script(src='/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js')
     // endbuild
+
     // build:js scripts/main.js
     script(src='scripts/main.js')
     // endbuild
+
+//    script
+//     | var species = !{JSON.stringify(title)}
+//     | console.log(species)

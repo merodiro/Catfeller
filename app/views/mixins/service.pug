@@ -1,9 +1,6 @@
-mixin service(icon, title)
-  .service
+mixin service(icon, name, description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+  .service.jello.wow(data-wow-delay=".2s")
     i.icon(class=icon)
     .content
-      h3=title
-      if block
-        block
-      else
-        p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      h3= name
+      p= description
