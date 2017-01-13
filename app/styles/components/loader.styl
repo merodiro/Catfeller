@@ -1,37 +1,36 @@
 .spinner-wrapper
-  fixed 0
   background-color $main-color
+  fixed 0
   z-index 99999
 
 .sk-cube-grid
-  size 55px
   absolute 48%
+  size 55px
 
   .sk-cube
-    width 33%
-    height 33%
+    animation sk-cubeGridScaleDelay 1.3s infinite ease-in-out
     background-color $light-color
     float left
-    animation sk-cubeGridScaleDelay 1.3s infinite ease-in-out
+    size 33%
 
   .sk-cube1
-    animation-delay 0.2s
+    animation-delay .2s
   .sk-cube2
-    animation-delay 0.3s
+    animation-delay .3s
   .sk-cube3
-    animation-delay 0.4s
+    animation-delay .4s
   .sk-cube4
-    animation-delay 0.1s
+    animation-delay .1s
   .sk-cube5
-    animation-delay 0.2s
+    animation-delay .2s
   .sk-cube6
-    animation-delay 0.3s
+    animation-delay .3s
   .sk-cube7
     animation-delay 0s
   .sk-cube8
-    animation-delay 0.1s
+    animation-delay .1s
   .sk-cube9
-    animation-delay 0.2s
+    animation-delay .2s
 
 @keyframes sk-cubeGridScaleDelay
   0%, 70%, 100%

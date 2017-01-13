@@ -1,40 +1,38 @@
 .navbar
   background $dark-color
   color $light-color
-  position: fixed
+  font-family $special-font
+  padding-top 20px
+  position fixed
   width 100%
   z-index 3
-  padding-top 20px
-  font-family $special-font
-  h2
-    color $main-color
-    text-transform uppercase
-    margin 0 0 15px
-    float left
-    font-family $special-font
-    +below('s')
-      // width 100%
-      text-align center
-      center()
-      margin 0
-      // shift(1/3)
   ul
     float right
     margin 0 0 15px
     +below('s')
+      margin 10px
       text-align center
       width 100%
-      margin 10px
     li
-      list-style none
       display inline
+      list-style none
       margin 0 15px
       +below('s')
-        text-align center
         span(1/3)
+        text-align center
       a
         color $light-color
         text-decoration none
         &:hover,
         &.active
           color $main-color
+  h2
+    color $main-color
+    text-transform uppercase
+    float left
+    font-family $special-font
+    margin 0 0 15px
+    +below('s')
+      margin 0
+      text-align center
+      center()

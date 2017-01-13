@@ -29,28 +29,22 @@ h6
     center(1140px, 15px)
 
 .overlay
-  position absolute
-  top 0
-  left 0
-  right 0
-  bottom 0
-  background-color rgba(darken($main-color, 60%), 0.35)
+  absolute 0
+  background-color rgba(darken($main-color, 50%), .2)
   z-index 1
 
 .special-heading
-  position relative
   font-family $special-font
+  position relative
   &:after
+    absolute 35px false false 0
+    border-bottom 3px solid $dark-color
     content ""
     display block
-    position absolute
-    top 35px
-    left 0
     width 40px
-    border-bottom 3px solid $dark-color
 
 .scroll
   visibility hidden
-  
+
 .seprator
   padding 1px solid $dark-color

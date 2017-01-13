@@ -1,0 +1,14 @@
+{
+    "extends": "standard",
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "env": {
+      "jquery" : true
+  },
+  "globals": {
+        "ScrollReveal": true,
+        "sr": false
+    }
+}

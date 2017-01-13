@@ -17,23 +17,24 @@
   .member
     column(1/2, $cycle: 2, $gutter: 5)
     margin-bottom 15px
+    position relative
     +above('l')
       column(1/4, $cycle: 4)
       margin-bottom 0
-    position relative
-    img
-      width 100%
+
     .overlay
-      text-align center
-      vertical-align center
       background-color rgba($main-color, .5)
       opacity 0
+      text-align center
       transition: all .5s easing("in-out-quad")
+      vertical-align center
       &:hover
         opacity 1
       span
         align(both)
-        display inline-block
         color $light-color
-        font-size 25px
+        display inline-block
         font-family $roboto
+        font-size 25px
+    img
+      width 100%
